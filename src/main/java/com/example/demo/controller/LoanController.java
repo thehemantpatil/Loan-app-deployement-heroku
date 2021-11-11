@@ -24,7 +24,7 @@ import com.example.demo.modal.User;
 import com.example.demo.modal.UserInterface;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RestController
 public class LoanController {
 
@@ -99,7 +99,7 @@ public class LoanController {
 		return true;
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "*")
 	@PostMapping("signup")
 	public Optional<User> createUser(@RequestBody User user) {
 		System.out.println("signUp coming");
@@ -111,7 +111,7 @@ public class LoanController {
 		return Optional.ofNullable(null);
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "*")
 	@PostMapping("login")
 	public Optional<User> getCredentials(@RequestBody User user) {
 
