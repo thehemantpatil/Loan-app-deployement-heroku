@@ -36,7 +36,11 @@ public class LoanController {
 
 	@Autowired
 	private PaymentScheduleInterface paymentScheduleInterface;
-
+	
+	@GetMapping("url-checking")
+	public String urlChecking() {
+			return "Coming";
+	}
 	@GetMapping("fetch-loan")
 	public Optional<List<Map>> fetchLoanDetails(@RequestParam Map<String, Long> customer) {
 		List<Map> loanApi = new ArrayList<Map>();
