@@ -1,4 +1,4 @@
-package com.example.demo.modal;
+package com.example.demo.model;
 
 import java.util.Date;
 import java.util.Map;

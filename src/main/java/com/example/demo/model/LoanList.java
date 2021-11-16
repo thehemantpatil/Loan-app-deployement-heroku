@@ -1,4 +1,4 @@
-package com.example.demo.modal;
+package com.example.demo.model;
 
 import java.util.Date;
 import java.util.Map;
@@ -14,18 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 public class LoanList {
 
-	public double getInterestRate() {
-		return interestRate;
-	}
-	public void setInterestRate(double interestRate) {
-		this.interestRate = interestRate;
-	}
-	public double getLoanAmount() {
-		return loanAmount;
-	}
-	public void setLoanAmount(double loanAmount) {
-		this.loanAmount = loanAmount;
-	}
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
@@ -69,6 +58,19 @@ public class LoanList {
 		this.interestRate = Double.parseDouble(String.valueOf(loan.get("interestRate")));
 		this.loanAmount = Double.parseDouble(String.valueOf(loan.get("loanAmount")));
 		this.totalAmount = Double.parseDouble(String.valueOf(loan.get("totalAmount")));
+	}
+	
+	public double getInterestRate() {
+		return interestRate;
+	}
+	public void setInterestRate(double interestRate) {
+		this.interestRate = interestRate;
+	}
+	public double getLoanAmount() {
+		return loanAmount;
+	}
+	public void setLoanAmount(double loanAmount) {
+		this.loanAmount = loanAmount;
 	}
 
 	public double getTotalAmount() {
