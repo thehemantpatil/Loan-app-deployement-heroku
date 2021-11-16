@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -70,7 +71,9 @@ public class AuthController {
 			UserDetails userDetails = userDetailsServiceImplementation.loadUserByUsername(user.getEmail());
 			User newUser = userInterface.findByEmail(user.getEmail());
 			String token = jwtUtil.generateToken(userDetails, newUser);
-			return Optional.of(new HashMap(Map.of("token", token)));
+			Map<String, String> response = new HashMap<String, String>();
+			response.put("token", token);
+			return Optional.of(response);
 		}
 	catch(Exception e)
 	{
