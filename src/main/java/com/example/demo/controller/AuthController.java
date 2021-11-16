@@ -25,7 +25,7 @@ import com.example.demo.service.JwtUtil;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-	
+
 	@Autowired
 	private AuthControllerService controllerService;
 
@@ -43,7 +43,7 @@ public class AuthController {
 
 	@Autowired
 	private UserDetailsServiceImplementation userDetailsServiceImplementation;
-	
+
 	@PostMapping("/signup")
 	public Optional<Map> createUser(@RequestBody User user) {
 		try {
@@ -52,7 +52,9 @@ public class AuthController {
 
 			if (serviceResponse) {
 				String token = jwtUtil.generateToken(userDetails, user);
-				return Optional.of(new HashMap(Map.of("token", token, "user", user)));
+				Map<String, String> response = new HashMap<String, String>();
+				response.put("token", token);
+				return Optional.of(response);
 			}
 
 		} catch (Exception e) {
@@ -61,24 +63,22 @@ public class AuthController {
 		return Optional.ofNullable(null);
 	}
 
-
 	@PostMapping("/login")
 	public Optional<Map> getCredentials(@RequestBody User user) {
 		System.out.println("Hemant Patil" + " my username is " + user.getEmail());
-		
+
 		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+			authenticationManager
+					.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
 			UserDetails userDetails = userDetailsServiceImplementation.loadUserByUsername(user.getEmail());
 			User newUser = userInterface.findByEmail(user.getEmail());
 			String token = jwtUtil.generateToken(userDetails, newUser);
 			Map<String, String> response = new HashMap<String, String>();
 			response.put("token", token);
 			return Optional.of(response);
-		}
-	catch(Exception e)
-	{
+		} catch (Exception e) {
 			return Optional.ofNullable(null);
 		}
 
-}
+	}
 }
